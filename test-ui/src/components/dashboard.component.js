@@ -8,7 +8,13 @@ const Dashboard = () => {
       <h2>Popular Movies</h2>
       <Carousel fetchMethod={TmdbDataService.getPopularMovies} />
 
-      <h2>Top Rated TV Shows</h2>
+      <h2>Popular TV Shows</h2>
+      <Carousel fetchMethod={TmdbDataService.getPopularTVShows} />
+
+      <h2>Movies</h2>
+      <Carousel fetchMethod={TmdbDataService.getMovies} />
+
+      <h2>TV Shows</h2>
       <Carousel fetchMethod={TmdbDataService.getTVShows} />
     </div>
   );

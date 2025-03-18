@@ -1,22 +1,22 @@
 import http from "../http-common";
 
 class TmdbDataService {
-  getMovies() {
-    return http.get("/tmdb/movies");
+  getMovies(page = 1) {
+    return http.get(`/tmdb/movies?page=${page}`);
   }
 
-  getPopularMovies() {
-    return http.get("/tmdb/movies/popular");
+  getPopularMovies(page = 1) {
+    return http.get(`/tmdb/movies/popular?page=${page}`);
   }
 
-  getTVShows() {
-    return http.get("/tmdb/tv");
+  getTVShows(page = 1) {
+    return http.get(`/tmdb/tv?page=${page}`);
   }
 
-  getPopularTVShows() {
-    return http.get("/tmdb/tv/popular");
+  getPopularTVShows(page = 1) {
+    return http.get(`/tmdb/tv/popular?page=${page}`);
   }
-
 }
+
 
 export default new TmdbDataService();

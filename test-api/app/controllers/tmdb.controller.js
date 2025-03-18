@@ -9,10 +9,13 @@ const TMDB_OPTIONS = {
 };
 
 exports.findAllMovies = async (req, res) => {
+  const { page = 1 } = req.query;
   try {
-    const response = await fetch(TMDB_BASE_URL + 'discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc', TMDB_OPTIONS);
+    const response = await fetch(
+      `${TMDB_BASE_URL}discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=vote_average.desc`,
+      TMDB_OPTIONS
+    );
     const data = await response.json();
-    
     res.send(data.results || []);
   } catch (error) {
     console.error("Error fetching movies:", error);
@@ -21,10 +24,13 @@ exports.findAllMovies = async (req, res) => {
 };
 
 exports.findAllTV = async (req, res) => {
+  const { page = 1 } = req.query; 
   try {
-    const response = await fetch(TMDB_BASE_URL + 'discover/tv?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc', TMDB_OPTIONS);
+    const response = await fetch(
+      `${TMDB_BASE_URL}discover/tv?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=vote_average.desc`,
+      TMDB_OPTIONS
+    );
     const data = await response.json();
-    
     res.send(data.results || []);
   } catch (error) {
     console.error("Error fetching TV Shows:", error);
@@ -33,10 +39,13 @@ exports.findAllTV = async (req, res) => {
 };
 
 exports.findPopularMovies = async (req, res) => {
+  const { page = 1 } = req.query;
   try {
-    const response = await fetch(TMDB_BASE_URL + 'movie/popular?language=en-US&page=1', TMDB_OPTIONS);
+    const response = await fetch(
+      `${TMDB_BASE_URL}movie/popular?language=en-US&page=${page}`, 
+      TMDB_OPTIONS
+    );
     const data = await response.json();
-    
     res.send(data.results || []);
   } catch (error) {
     console.error("Error fetching popular movies:", error);
@@ -45,15 +54,16 @@ exports.findPopularMovies = async (req, res) => {
 };
 
 exports.findPopularTV = async (req, res) => {
+  const { page = 1 } = req.query; 
   try {
-    const response = await fetch(TMDB_BASE_URL + 'tv/popular?language=en-US&page=1', TMDB_OPTIONS);
+    const response = await fetch(
+      `${TMDB_BASE_URL}tv/popular?language=en-US&page=${page}`, 
+      TMDB_OPTIONS
+    );
     const data = await response.json();
-    
     res.send(data.results || []);
   } catch (error) {
     console.error("Error fetching popular TV Shows:", error);
     res.status(500).send({ message: "Error retrieving popular TV Shows" });
   }
 };
-
-

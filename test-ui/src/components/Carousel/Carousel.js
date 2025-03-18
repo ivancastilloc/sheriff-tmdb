@@ -2,40 +2,48 @@ import React, { useState, useEffect } from "react";
 import Card from "../Card/Card";
 
 const Carousel = ({ fetchMethod }) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]); 
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);  
 
   useEffect(() => {
     if (!fetchMethod) return;
 
-    fetchMethod()
+    fetchMethod(page)
       .then(response => {
-        setItems(response.data || []); 
+        setItems(prevItems => [...prevItems, ...(response.data || [])]);  
         setLoading(false);
       })
       .catch(error => {
         console.error(error);
         setLoading(false);
       });
-  }, [fetchMethod]);
+  }, [fetchMethod, page]);  
+
+  const handleLoadMore = () => {
+    setPage(prevPage => prevPage + 1); 
+  };
+  
 
   return (
-    <div     
-        style={{
-        display: "flex",
-        gap: "12px",
-        maxWidth: "100vw",
-        overflowX: "auto", 
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-        marginLeft: "20px",
-        marginRight: "20px",
-      }}>
-      {items.length > 0 ? (
-        items.map(item => <Card key={item.id} info={item} />)
+    <div className="customCarousel"
+    >
+      {loading ? (
+        <p>Loading...</p>
+      ) : items.length > 0 ? (
+        items.map(item => <Card key={item.id} info={item} />) 
       ) : (
-        <p>No items found.</p>
+        <p>No items found.</p> 
       )}
+
+      <div style={{ width: "100%", textAlign: "center", marginTop: "20px" }}>
+        <button 
+          onClick={handleLoadMore} 
+          style={{ padding: "10px 20px", cursor: "pointer" }}
+        >
+          Load More
+        </button>
+      </div>
     </div>
   );
 };

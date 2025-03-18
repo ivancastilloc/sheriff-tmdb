@@ -1,15 +1,8 @@
-.list {
-  text-align: left;
-  max-width: 750px;
-  margin: auto;
-}
-
-.submit-form {
-  max-width: 300px;
-  margin: auto;
-}
-
-.edit-form {
-  max-width: 300px;
-  margin: auto;
+.customCarousel{
+  display: flex;
+  gap: 12px;
+  max-width: 100vw;
+  margin-left: 20px;
+  margin-right: 20px;
+  overflow-x: auto;
 }
