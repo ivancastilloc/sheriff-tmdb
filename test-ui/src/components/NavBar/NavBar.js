@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
+import "./NavBar.css";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,24 +30,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand navbar-dark bg-dark">
-      <Link to="/" className="navbar-brand">Inicio</Link>
-      <div className="navbar-nav">
-        {authService.isAuthenticated() ? (
-          <>
-            <Link to="/dashboard" className="nav-link">Dashboard</Link>
-            <Link to="/favourites" className="nav-link">Favourites</Link>
-            <button onClick={handleLogout} className="btn btn-link">Logout</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="nav-link">Login</Link>
-            <Link to="/register" className="nav-link">Logout</Link>
-          </>
-        )}
+    <nav className="navbar__container">
+      <div className="navbar__content--left">
+        <Link to="/" className="navbar__brand">TMDB</Link>
+        <div className="navbar__links">
+            <>
+              <Link to="/dashboard" className="navbar__link">Dashboard</Link>
+              <Link to="/favourites" className="navbar__link">Favourites</Link>
+            </>
+        </div>
       </div>
 
-      <div className="form-inline ml-auto">
+      <div className="navbar__content--right">
         <input
           className="form-control"
           type="search"
@@ -54,6 +49,7 @@ const Navbar = () => {
           value={searchQuery}
           onChange={handleSearchChange}
         />
+        <button onClick={handleLogout} className="btn btn-link">Logout</button>
       </div>
     </nav>
   );

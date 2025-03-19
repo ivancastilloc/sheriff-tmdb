@@ -22,7 +22,7 @@ const App = () => {
   return (
     <div>
       {authService.isAuthenticated() && <NavBar />}
-      <div className="mt-2 mr-2 ml-2">
+      <div className="m-3">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
