@@ -1,6 +1,6 @@
 import React from "react";
 import TmdbDataService from "../services/tmdb.service";
-import Carousel from "./Carousel/Carousel";
+import Carousel from "../components/Carousel/Carousel";
 
 const Dashboard = () => {
   return (

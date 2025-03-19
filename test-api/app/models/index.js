@@ -20,7 +20,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.tutorials = require("./user.model.js")(sequelize, Sequelize);
-db.tutorials = require("./userFavourite.model.js")(sequelize, Sequelize);
+db.user = require("./user.model.js")(sequelize, Sequelize);
+db.userFavourite = require("./userFavourite.model.js")(sequelize, Sequelize);
 
 module.exports = db;

@@ -26,12 +26,12 @@ db.sequelize.sync();
 //   console.log("Drop and re-sync db.");
 // });
 
-// simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Sheriff - TMDB application." });
 });
 
 require("./app/routes/tmdb.routes")(app);
+require("./app/routes/user.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_DOCKER_PORT || 8080;

@@ -3,11 +3,15 @@ module.exports = (sequelize, Sequelize) => {
     user_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
+      primaryKey: true,
     },
     content_id: {
       type: Sequelize.INTEGER,
-      allowNull: false, 
+      allowNull: false,
+      primaryKey: true,
     }
+  }, {
+    timestamps: false,
   });
 
   UserFavourite.associate = (models) => {
@@ -16,7 +20,6 @@ module.exports = (sequelize, Sequelize) => {
       targetKey: 'id',
       onDelete: 'CASCADE',
     });
-
   };
 
   return UserFavourite;

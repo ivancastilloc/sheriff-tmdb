@@ -1,40 +1,35 @@
-import React, { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import NavBar from "./components/NavBar/NavBar";
+import Dashboard from "./pages/Dashboard.page";
+import LoginPage from "./pages/Login.page";
+import RegisterPage from "./pages/Register.page";
+import authService from "./services/auth.service";
 
-import Dashboard from "./components/dashboard.component";
+const App = () => {
+  const navigate = useNavigate();
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/tutorials"} className="navbar-brand">
-            TMDB
-          </Link>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/tutorials"} className="nav-link">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
-                Favoritos
-              </Link>
-            </li>
-          </div>
-        </nav>
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, []);
 
-        <div className="mt-2 mr-2 ml-2">
-          <Switch>
-            <Route exact path={["/"]} component={Dashboard} />
-          </Switch>
-        </div>
+  return (
+    <div>
+      {authService.isAuthenticated() && <NavBar />}
+      <div className="mt-2 mr-2 ml-2">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Routes>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default App;
