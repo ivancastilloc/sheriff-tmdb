@@ -14,11 +14,17 @@ module.exports = app => {
   // Retrieve popular movies
   router.get("/movies/popular", tmdb.findPopularMovies);
 
+  // Retrieve movie genres
+  router.get("/movies/genres", tmdb.findMovieGenres);
+
   // Retrieve tv shows
   router.get("/tv", tmdb.findAllTV);
 
   // Retrieve popular tv shows
   router.get("/tv/popular", tmdb.findPopularTV);
+
+    // Retrieve TV genres
+    router.get("/tv/genres", tmdb.findTVGenres);
 
   // Search in TV Shows and Movies
   router.get("/search", tmdb.search);

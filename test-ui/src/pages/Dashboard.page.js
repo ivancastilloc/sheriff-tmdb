@@ -5,8 +5,29 @@ import userFavouritesService from "../services/userFavourites.service";
 import authService from "../services/auth.service";
 
 const Dashboard = () => {
+  const [movieGenres, setMovieGenres] = useState([]);
+  const [tvGenres, setTvGenres] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const user_id = authService.getUserId();
+
+  useEffect(() => {
+    TmdbDataService.getMovieGenres()
+      .then(response => {
+        setMovieGenres(response.data);
+      })
+      .catch(error => {
+        console.error("Error al obtener generos de peliculas:", error);
+      });
+
+    TmdbDataService.getTVGenres()
+      .then(response => {
+        console.log(response)
+        setTvGenres(response.data);
+      })
+      .catch(error => {
+        console.error("Error al obtener generos de series:", error);
+      });
+      }, []);
 
   useEffect(() => {
     if (user_id) {
@@ -25,16 +46,16 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Popular Movies 🔥</h2>
-      <Carousel fetchMethod={TmdbDataService.getPopularMovies} favourites={favourites} />
+      <Carousel fetchMethod={TmdbDataService.getPopularMovies} favourites={favourites} genres={movieGenres} />
 
       <h2>Popular TV Shows 🔥</h2>
-      <Carousel fetchMethod={TmdbDataService.getPopularTVShows} favourites={favourites}/>
+      <Carousel fetchMethod={TmdbDataService.getPopularTVShows} favourites={favourites} genres={tvGenres}/>
 
       <h2>Movies 🎥</h2>
-      <Carousel fetchMethod={TmdbDataService.getMovies} favourites={favourites}/>
+      <Carousel fetchMethod={TmdbDataService.getMovies} favourites={favourites} genres={movieGenres}/>
 
       <h2>TV Shows 📺</h2>
-      <Carousel fetchMethod={TmdbDataService.getTVShows} favourites={favourites}/>
+      <Carousel fetchMethod={TmdbDataService.getTVShows} favourites={favourites} genres={tvGenres}/>
     </div>
   );
 };

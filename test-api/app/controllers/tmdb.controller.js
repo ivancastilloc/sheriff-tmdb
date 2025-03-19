@@ -68,6 +68,34 @@ exports.findPopularTV = async (req, res) => {
   }
 };
 
+exports.findMovieGenres = async (req, res) => {
+  try {
+    const response = await fetch(
+      `${TMDB_BASE_URL}/genre/movie/list?language=en'`, 
+      TMDB_OPTIONS
+    );
+    const data = await response.json();
+    res.send(data.genres || []);
+  } catch (error) {
+    console.error("Error fetching Movie Genres:", error);
+    res.status(500).send({ message: "Error retrieving Movie Genres" });
+  }
+};
+
+exports.findTVGenres = async (req, res) => {
+  try {
+    const response = await fetch(
+      `${TMDB_BASE_URL}/genre/tv/list?language=en'`, 
+      TMDB_OPTIONS
+    );
+    const data = await response.json();
+    res.send(data.genres || []);
+  } catch (error) {
+    console.error("Error fetching TV Genres:", error);
+    res.status(500).send({ message: "Error retrieving TV Genres" });
+  }
+};
+
 exports.search = async (req, res) => {
   const { query, page = 1 } = req.query; 
   try {

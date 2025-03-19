@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Card from "../Card/Card";
 import "./Carousel.css";
 
-const Carousel = ({ fetchMethod, favourites }) => {
+const Carousel = ({ fetchMethod, favourites, genres }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -75,7 +75,7 @@ const Carousel = ({ fetchMethod, favourites }) => {
         {loading ? (
           <p>Loading...</p>
         ) : items.length > 0 ? (
-          items.map(item => <Card key={item.id} info={item} favourites={favourites} />)
+          items.map(item => <Card key={item.id} info={item} favourites={favourites} genres={genres} />)
         ) : (
           <p>No items found.</p>
         )}

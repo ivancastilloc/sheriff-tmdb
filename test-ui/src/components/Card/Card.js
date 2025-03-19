@@ -5,10 +5,13 @@ import authService from "../../services/auth.service";
 import "./Card.css";
 
 const Card = (props) => {
-  const { info, width, height, favourites, onToggleFavourite, cardId = info.id } = props;
+  const { info, width, height, favourites, onToggleFavourite, cardId = info.id, genres = [] } = props;
   const [isFavourite, setIsFavourite] = useState(false);
 
   const user_id = authService.getUserId();
+
+  console.log(info);
+  console.log(genres);
 
   useEffect(() => {
     const isAlreadyFavourite = favourites.some(
@@ -48,6 +51,13 @@ const Card = (props) => {
     }
   };
 
+  const genreNames = info.genre_ids
+    .map((id) => {
+      const genre = genres.find((g) => g.id === id);
+      return genre ? genre.name : null;
+    })
+    .filter((name) => name !== null);
+
   return (
     <div className="card__container">
       {info.poster_path ? (
@@ -72,6 +82,11 @@ const Card = (props) => {
         <p className="card__release-date">
           {info.release_date || info.first_air_date}
         </p>
+        {genreNames.length > 0 ? (
+          <p className="card__release-date">{genreNames.join(", ")}</p>
+        ) : (
+          <p className="card__release-date">No genres found</p>
+        )}
       </div>
 
       <div className="card__hover-info">
