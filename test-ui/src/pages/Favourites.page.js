@@ -35,7 +35,7 @@ const Favourites = () => {
 
   return (
     <div>
-      <h2>Mis Favoritos</h2>
+      <h2>Your favourites 😍</h2>
       
       <div className="favourites-grid">
         {favourites.map((fav, index) => (

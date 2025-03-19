@@ -24,16 +24,16 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Popular Movies</h2>
+      <h2>Popular Movies 🔥</h2>
       <Carousel fetchMethod={TmdbDataService.getPopularMovies} favourites={favourites} />
 
-      <h2>Popular TV Shows</h2>
+      <h2>Popular TV Shows 🔥</h2>
       <Carousel fetchMethod={TmdbDataService.getPopularTVShows} favourites={favourites}/>
 
-      <h2>Movies</h2>
+      <h2>Movies 🎥</h2>
       <Carousel fetchMethod={TmdbDataService.getMovies} favourites={favourites}/>
 
-      <h2>TV Shows</h2>
+      <h2>TV Shows 📺</h2>
       <Carousel fetchMethod={TmdbDataService.getTVShows} favourites={favourites}/>
     </div>
   );
