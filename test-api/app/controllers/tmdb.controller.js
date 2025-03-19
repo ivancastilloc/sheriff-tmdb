@@ -67,3 +67,18 @@ exports.findPopularTV = async (req, res) => {
     res.status(500).send({ message: "Error retrieving popular TV Shows" });
   }
 };
+
+exports.search = async (req, res) => {
+  const { query, page = 1 } = req.query; 
+  try {
+    const response = await fetch(
+      `${TMDB_BASE_URL}search/multi?query=${query}&include_adult=false&language=en-US&page=${page}`, 
+      TMDB_OPTIONS
+    );
+    const data = await response.json();
+    res.send(data || []);
+  } catch (error) {
+    console.error("Error searching content:", error);
+    res.status(500).send({ message: "Error searching for content" });
+  }
+};

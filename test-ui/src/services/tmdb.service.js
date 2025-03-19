@@ -16,7 +16,10 @@ class TmdbDataService {
   getPopularTVShows(page = 1) {
     return http.get(`/tmdb/tv/popular?page=${page}`);
   }
-}
 
+  search(query = "", page = 1) {
+    return http.get(`/tmdb/search?query=${encodeURIComponent(query)}&page=${page}`);
+  }
+}
 
 export default new TmdbDataService();

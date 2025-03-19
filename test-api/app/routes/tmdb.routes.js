@@ -20,5 +20,8 @@ module.exports = app => {
   // Retrieve popular tv shows
   router.get("/tv/popular", tmdb.findPopularTV);
 
+  // Search in TV Shows and Movies
+  router.get("/search", tmdb.search);
+
   app.use('/api/tmdb', router);
 };
