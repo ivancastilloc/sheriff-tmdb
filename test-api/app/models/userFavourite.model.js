@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
   const UserFavourite = sequelize.define("user_favourite", {
     user_id: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.UUID,
       allowNull: false,
       primaryKey: true,
     },

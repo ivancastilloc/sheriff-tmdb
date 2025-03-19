@@ -17,5 +17,14 @@ module.exports = app => {
   // Ruta para login
   router.post("/login", users.login);
 
+  // Ruta para obtener todos los favoritos del usuario autenticado
+  router.get("/favourites", users.getFavourites);
+
+  // Ruta para agregar un favorito (recibe user_id y content_id en el cuerpo)
+  router.post("/favourites", users.addFavourite);
+
+  // Ruta para eliminar un favorito (recibe user_id y content_id en el cuerpo)
+  router.delete("/favourites", users.deleteFavourite);
+
   app.use('/api/users', router);
 };

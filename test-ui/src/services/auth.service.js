@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 class AuthService {
     setToken(token) {
       localStorage.setItem("token", token);
@@ -5,6 +6,20 @@ class AuthService {
   
     getToken() {
       return localStorage.getItem("token");
+    }
+
+    getUserId() {
+      const token = this.getToken();
+      if (token) {
+        try {
+          const decoded = jwtDecode(token);
+          return decoded.id;
+        } catch (error) {
+          console.error("Error al decodificar el token:", error);
+          return null;
+        }
+      }
+      return null;
     }
   
     isAuthenticated() {
