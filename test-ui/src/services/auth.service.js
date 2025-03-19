@@ -8,6 +8,20 @@ class AuthService {
       return localStorage.getItem("token");
     }
 
+    getCurrentUser() {
+      const token = this.getToken();
+      if (token) {
+        try {
+          const decoded = jwtDecode(token);
+          return decoded;
+        } catch (error) {
+          console.error("Error al decodificar el token:", error);
+          return null;
+        }
+      }
+      return null;
+    }
+
     getUserId() {
       const token = this.getToken();
       if (token) {

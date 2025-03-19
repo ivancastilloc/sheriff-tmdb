@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaSignOutAlt, FaRegUserCircle } from "react-icons/fa";
 import authService from "../../services/auth.service";
 import "./NavBar.css";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [user, setUser] = useState({ username: "", email: "" });
   const [timeoutId, setTimeoutId] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const currentUser = authService.getCurrentUser();
+    if (currentUser) {
+      setUser({
+        username: currentUser.username,
+        email: currentUser.email,
+      });
+    }
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -30,6 +42,10 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const toggleUserMenu = () => {
+    setIsUserMenuOpen(!isUserMenuOpen);
+  };
+
   return (
     <nav className="navbar__container">
       <div className="navbar__content--left">
@@ -46,10 +62,19 @@ const Navbar = () => {
         <input
           className="form-control"
           type="search"
-          placeholder="Search..."
+          placeholder="Search... 🔍"
           value={searchQuery}
           onChange={handleSearchChange}
         />
+        <button onClick={toggleUserMenu} className="user_btn"> <FaRegUserCircle /> </button>
+
+        {isUserMenuOpen && (
+          <div className="user_menu">
+            <p><strong>Username:</strong> {user.username}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+          </div>
+        )}
+
         <button onClick={handleLogout} className="logout_btn"><FaSignOutAlt /></button>
       </div>
     </nav>
