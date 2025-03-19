@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import userFavouritesService from "../services/userFavourites.service";
 import authService from "../services/auth.service";
+import Card from "../components/Card/Card";
 
 const Favourites = () => {
   const [favourites, setFavourites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const user_id = authService.getUserId();
+  const loadMoreRef = useRef(null);
 
   useEffect(() => {
     loadFavourites(currentPage);
@@ -16,11 +18,11 @@ const Favourites = () => {
     userFavouritesService.getPaginatedFavourites(user_id, page, 20)
       .then((response) => {
         setFavourites((prevFavourites) => [
-            ...prevFavourites,
-            ...response.data.favourites,
-          ]);
+          ...prevFavourites,
+          ...response.data.favourites,
+        ]);
 
-        if (currentPage == response.data.totalPages || response.data.favourites.length < 20) {
+        if (page >= response.data.totalPages || response.data.favourites.length < 20) {
           setHasMore(false);
         }
       })
@@ -29,35 +31,38 @@ const Favourites = () => {
       });
   };
 
-  const handleLoadMore = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setCurrentPage((prevPage) => prevPage + 1);
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [hasMore]);
 
   return (
     <div>
       <h2>Your favourites 😍</h2>
       
-      <div className="favourites-grid">
-        {favourites.map((fav, index) => (
-          <div className="favourite-item" key={index} style={{ width: "calc(20% - 10px)", margin: "5px", display: "inline-block" }}>
-            <img
-              src={`https://image.tmdb.org/t/p/original/${fav.poster_path}`}
-              alt={fav.title}
-              style={{ width: "100%", height: "auto", borderRadius: "5px" }}
-            />
-            <div>
-              <p>{fav.title}</p>
-              <p>{fav.release_date}</p>
-            </div>
-          </div>
+      <div className="favourites_grid">
+        {favourites.map((fav) => (
+          <Card key={fav.content_id} info={fav} favourites={favourites} cardId={fav.content_id} />
         ))}
       </div>
 
-      {hasMore && (
-        <button onClick={handleLoadMore} className="btn btn-primary">
-          Cargar más
-        </button>
-      )}
+      {hasMore && <div ref={loadMoreRef} style={{ height: "20px" }} />}
     </div>
   );
 };

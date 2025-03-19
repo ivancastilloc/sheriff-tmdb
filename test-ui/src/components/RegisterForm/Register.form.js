@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loginService from "../../services/login.service";
+import "./Register.css";
 
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
@@ -26,52 +27,49 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex align-items-center justify-content-center h-screen">
-      <form autoComplete="off" onSubmit={registerSubmit}>
-        <h2>Registro</h2>
-
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <div>
-          <label htmlFor="username">Usuario</label>
-          <input
-            id="username"
-            type="text"
-            placeholder="Introduce tu nombre de usuario"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Introduce tu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password">Contraseña</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Introduce tu contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Registrando..." : "Registrarse"}
-        </button>
-      </form>
+    <div class="form__container">
+      <div className="register__container">
+        <form className="register__form" autoComplete="off" onSubmit={registerSubmit}>
+          <h2 className="register__title">Register</h2>
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <div className="register__input">
+            <label className="register__label" htmlFor="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="register__input">
+            <label className="register__label" htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="example@mail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="register__input">
+            <label className="register__label" htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button className="register__submit" type="submit" disabled={loading}>
+            {loading ? "Loading..." : "Register"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

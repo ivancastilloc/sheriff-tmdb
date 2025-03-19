@@ -1,0 +1,78 @@
+.form__container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://img.freepik.com/free-photo/assortment-cinema-elements-red-background-with-copy-space_23-2148457848.jpg') 
+        no-repeat center center;
+    background-size: cover;
+}
+
+
+.login__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 80%;
+    border-radius: 20px;
+    background-color: #221f1f;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    width: 75%;
+}
+
+.login__title {
+    font-size: 24px;
+    color: #f5f5f1;
+    margin-bottom: 8px;
+}
+
+.login__input {
+    display: flex;
+    flex-direction: column;
+}
+
+.login__label {
+    margin-bottom: 15px;
+}
+
+.login__submit {
+    width: 100%;
+    padding: 16px;
+    border-color:#e50914;
+    border: solid 1px;
+    border-radius: 15px;
+    background-color: #221f1f;
+    color: #e50914;
+    transition: all 0.2s ease;
+}
+
+.login__submit:hover {
+    background-color: #363131;
+}
+
+.login__create {
+    width: 100%;
+    padding: 16px;
+    color: #f5f5f1;
+    background-color:#e50914;
+    border: solid 1px;
+    border-radius: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.login__create:hover{
+    background-color:#ce0913;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FaSignOutAlt } from "react-icons/fa";
 import authService from "../../services/auth.service";
 import "./NavBar.css";
 
@@ -49,7 +50,7 @@ const Navbar = () => {
           value={searchQuery}
           onChange={handleSearchChange}
         />
-        <button onClick={handleLogout} className="btn btn-link">Logout</button>
+        <button onClick={handleLogout} className="logout_btn"><FaSignOutAlt /></button>
       </div>
     </nav>
   );

@@ -50,3 +50,11 @@
     align-items: center;
     gap: 1rem;
 }
+
+.logout_btn {
+    color: #f5f5f1;
+    font-weight: 700;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+}

@@ -5,14 +5,14 @@ import authService from "../../services/auth.service";
 import "./Card.css";
 
 const Card = (props) => {
-  const { info, width, height, favourites, onToggleFavourite } = props;
+  const { info, width, height, favourites, onToggleFavourite, cardId = info.id } = props;
   const [isFavourite, setIsFavourite] = useState(false);
 
   const user_id = authService.getUserId();
 
   useEffect(() => {
     const isAlreadyFavourite = favourites.some(
-      (fav) => fav.content_id === info.id
+      (fav) => fav.content_id === cardId
     );
     setIsFavourite(isAlreadyFavourite);
   }, [favourites, info.id]);
