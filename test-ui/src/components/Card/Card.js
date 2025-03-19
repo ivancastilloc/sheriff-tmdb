@@ -28,7 +28,14 @@ const Card = (props) => {
         });
     } else {
       userFavouritesService
-        .addFavourite(user_id, info.id)
+        .addFavourite(
+          user_id,
+          info.id,
+          info.title || info.original_title || info.name || info.original_name,
+          info.release_date || info.first_air_date,
+          info.vote_average,
+          info.poster_path || null
+        )
         .then(() => {
           setIsFavourite(true);
           onToggleFavourite(info.id, true);

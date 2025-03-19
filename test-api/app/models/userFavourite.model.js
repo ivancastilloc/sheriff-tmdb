@@ -9,6 +9,22 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false,
       primaryKey: true,
+    },
+    title: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    release_date: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    vote_average: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    poster_path: {
+      type: Sequelize.STRING,
+      allowNull: true,
     }
   }, {
     timestamps: false,

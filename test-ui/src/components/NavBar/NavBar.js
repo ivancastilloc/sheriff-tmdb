@@ -16,6 +16,7 @@ const Navbar = () => {
       {authService.isAuthenticated() ? (
         <>
           <Link to="/dashboard">Dashboard</Link>
+          <Link to="/favourites">Favourites</Link>
           <button onClick={handleLogout}>Cerrar sesión</button>
         </>
       ) : (

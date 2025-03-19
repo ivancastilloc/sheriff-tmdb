@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard.page";
 import LoginPage from "./pages/Login.page";
 import RegisterPage from "./pages/Register.page";
 import authService from "./services/auth.service";
+import Favourites from "./pages/Favourites.page";
 
 const App = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/favourites" element={<Favourites />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>

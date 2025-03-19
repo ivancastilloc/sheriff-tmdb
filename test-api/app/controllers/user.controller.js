@@ -62,7 +62,8 @@ exports.getFavourites = async (req, res) => {
     }
 
     const favourites = await UserFavourite.findAll({
-      where: { user_id }
+      where: { user_id },
+      attributes: ['user_id', 'content_id']
     });
 
     res.status(200).send(favourites);
@@ -72,10 +73,39 @@ exports.getFavourites = async (req, res) => {
   }
 };
 
+exports.getPaginatedFavourites = async (req, res) => {
+  try {
+    const { user_id, page = 1, limit = 20 } = req.query;
+
+    if (!user_id) {
+      return res.status(400).send({ message: "El user_id es necesario para obtener los favoritos." });
+    }
+
+    const offset = (page - 1) * limit;
+
+    const favourites = await UserFavourite.findAndCountAll({
+      where: { user_id },
+      limit: parseInt(limit),
+      offset: offset,
+    });
+
+    const totalPages = Math.ceil(favourites.count / limit);
+
+    res.status(200).send({
+      favourites: favourites.rows,
+      total: favourites.count,
+      page: parseInt(page),
+      totalPages: totalPages,
+    });
+  } catch (error) {
+    console.error("Error al obtener los favoritos:", error);
+    res.status(500).send({ message: "Error al obtener los favoritos." });
+  }
+};
+
 exports.addFavourite = async (req, res) => {
   try {
-    const { user_id, content_id } = req.body;
-    console.log(user_id, content_id);
+    const { user_id, content_id, title, release_date, vote_average, poster_path } = req.body;
 
     if (!user_id || !content_id) {
       return res.status(400).send({ message: "user_id y content_id son requeridos." });
@@ -84,6 +114,10 @@ exports.addFavourite = async (req, res) => {
     await UserFavourite.create({
       user_id,
       content_id,
+      title: title || null,
+      release_date: release_date || null,
+      vote_average: vote_average || null,
+      poster_path: poster_path || null,
     });
 
     res.status(201).send({ message: "Favorito agregado correctamente." });
