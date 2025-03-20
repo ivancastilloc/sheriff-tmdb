@@ -20,7 +20,13 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     }
   }, {
-    timestamps: false
+    timestamps: false,
+    indexes: [
+      {
+        unique: true,
+        fields: ['email'],
+      },
+    ],
   });
 
   return User;

@@ -28,6 +28,12 @@ module.exports = (sequelize, Sequelize) => {
     }
   }, {
     timestamps: false,
+    indexes: [
+      {
+        unique: true,
+        fields: ['user_id', 'content_id'],
+      },
+    ],
   });
 
   UserFavourite.associate = (models) => {
