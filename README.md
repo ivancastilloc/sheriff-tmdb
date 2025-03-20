@@ -27,7 +27,12 @@ cd .\sheriff-tmdb\
 
 ## 2️⃣ Iniciar la aplicación 🚀
 
-En este caso **docker-compose** se encarga de levantar los contenedores e intalar las dependecias. Para esto es necesario tener andando **Docker Engine**
+
+```
+Para que este paso funcione es necesario crear un .env como el de ejemplo y reemplazar la key de TMDB por una que funcione.
+```
+
+En este caso **docker-compose** se encarga de levantar los contenedores e intalar las dependecias. Para esto es necesario tener andando **Docker Engine**.
 
 ```bash
 docker-compose up
