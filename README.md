@@ -28,9 +28,8 @@ cd .\sheriff-tmdb\
 ## 2️⃣ Iniciar la aplicación 🚀
 
 
-```
-Para que este paso funcione es necesario crear un .env como el de ejemplo y reemplazar la key de TMDB por una que funcione.
-```
+
+> Para que este paso funcione es necesario crear un .env como el de ejemplo y reemplazar la key de TMDB por una que funcione.
 
 En este caso **docker-compose** se encarga de levantar los contenedores e intalar las dependecias. Para esto es necesario tener andando **Docker Engine**.
 
@@ -39,15 +38,18 @@ docker-compose up
 ```
 
 
-## 3️ Acceder a la Interfaz 🌐
+## 3️ Acceder a la App 🌐
 La aplicación queda disponible en:
 
 🔗 http://localhost:8888/
 
+> Derepente me daba un error el intentar entrar a través del link directo y creo que es por como configure el nginx. Pido disculpas, la solución es abrirlo a través del link de docker engine.
+
+![openApp](./img/openDocker.PNG)
+
+
 ## Base de Datos 🗄️
 La base de datos esta en MySQL 5.7, para esto se pueden usar aplicaciones como **DBeaver** para acceder
-
-🔗 http://localhost:8080/h2-console
 
 Usar las siguientes credenciales para conectarse:
 
